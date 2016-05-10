@@ -50,4 +50,49 @@ public class Bill {
     public void setScore(Double score) {
         this.score = score;
     }
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((card == null) ? 0 : card.hashCode());
+	result = prime * result + ((id == null) ? 0 : id.hashCode());
+	result = prime * result + ((isBlocked == null) ? 0 : isBlocked.hashCode());
+	result = prime * result + ((score == null) ? 0 : score.hashCode());
+	return result;
+    }
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (obj == null)
+	    return false;
+	if (getClass() != obj.getClass())
+	    return false;
+	Bill other = (Bill) obj;
+	if (card == null) {
+	    if (other.card != null)
+		return false;
+	} else if (!card.equals(other.card))
+	    return false;
+	if (id == null) {
+	    if (other.id != null)
+		return false;
+	} else if (!id.equals(other.id))
+	    return false;
+	if (isBlocked == null) {
+	    if (other.isBlocked != null)
+		return false;
+	} else if (!isBlocked.equals(other.isBlocked))
+	    return false;
+	if (score == null) {
+	    if (other.score != null)
+		return false;
+	} else if (!score.equals(other.score))
+	    return false;
+	return true;
+    }
+    @Override
+    public String toString() {
+	return "Bill [id=" + id + ", isBlocked=" + isBlocked + ", score=" + score + ", card=" + card + "]";
+    }
 }
