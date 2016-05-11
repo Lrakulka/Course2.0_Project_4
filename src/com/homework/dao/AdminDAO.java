@@ -3,21 +3,21 @@
  */
 package com.homework.dao;
 
-import java.util.Set;
+import java.util.List;
 
 import com.homework.entities.Bill;
 import com.homework.entities.User;
 
 /**
  * @author asd
- *
+ * DAO interface for actor admin.
  */
 public interface AdminDAO {
     /**
      * Return set of all clients.
      * @return set of clients
      */
-    Set<User> getClients();
+    List<User> getClients();
     
     /**
      * Take block off of client bill.

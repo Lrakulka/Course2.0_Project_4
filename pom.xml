@@ -29,11 +29,34 @@
   <properties>
  
        <hibernate.version>4.3.6.Final</hibernate.version>
- 
+	   <spring-framework.version>4.2.6.RELEASE</spring-framework.version>
+	   <s3p0.version>0.9.1.2</s3p0.version>
+	   <mysql.version>5.1.6</mysql.version>
+	   
   </properties>
-    
-    
+  
   <dependencies>
+    
+      <!-- S3PO -->
+	  <dependency>
+		<groupId>c3p0</groupId>
+		<artifactId>c3p0</artifactId>
+		<version>${s3p0.version}</version>
+	  </dependency>
+  
+  	 <!--  Spring -->
+	 <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring-framework.version}</version>
+     </dependency>
+     <!-- Spring ORM -->
+     <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring-framework.version}</version>
+     </dependency>
+        
   	 <!-- Hibernate -->
      <dependency>
          <groupId>org.hibernate</groupId>
@@ -45,5 +68,12 @@
          <artifactId>hibernate-core</artifactId>
          <version>${hibernate.version}</version>
      </dependency>
+     <!-- MySQL -->
+    <dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>${mysql.version}</version>
+	</dependency>
+     
   </dependencies>
 </project>

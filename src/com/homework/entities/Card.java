@@ -2,6 +2,7 @@ package com.homework.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -18,10 +19,10 @@ public class Card {
     private Integer id;
     @Column(name = "name")
     private String name;
-    @OneToOne
+    @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "id_bill")
     private Bill bill;
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "id_user")
     private User user;
     
@@ -49,14 +50,13 @@ public class Card {
     public void setName(String name) {
         this.name = name;
     }
+    
     @Override
     public int hashCode() {
 	final int prime = 31;
 	int result = 1;
-	result = prime * result + ((bill == null) ? 0 : bill.hashCode());
 	result = prime * result + ((id == null) ? 0 : id.hashCode());
 	result = prime * result + ((name == null) ? 0 : name.hashCode());
-	result = prime * result + ((user == null) ? 0 : user.hashCode());
 	return result;
     }
     @Override
@@ -68,11 +68,6 @@ public class Card {
 	if (getClass() != obj.getClass())
 	    return false;
 	Card other = (Card) obj;
-	if (bill == null) {
-	    if (other.bill != null)
-		return false;
-	} else if (!bill.equals(other.bill))
-	    return false;
 	if (id == null) {
 	    if (other.id != null)
 		return false;
@@ -83,15 +78,10 @@ public class Card {
 		return false;
 	} else if (!name.equals(other.name))
 	    return false;
-	if (user == null) {
-	    if (other.user != null)
-		return false;
-	} else if (!user.equals(other.user))
-	    return false;
 	return true;
     }
     @Override
     public String toString() {
-	return "Card [id=" + id + ", name=" + name + ", bill=" + bill + ", user=" + user + "]";
+	return "Card [id=" + id + ", name=" + name + "]";
     }
 }

@@ -1,10 +1,11 @@
 package com.homework.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,8 +23,7 @@ public class Bill {
     private Boolean isBlocked;
     @Column(name = "score")
     private Double score;
-    @OneToOne
-    @JoinColumn(name="id_bill")
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "bill", cascade = CascadeType.ALL)
     private Card card;
     
     public Card getCard() {
@@ -50,11 +50,11 @@ public class Bill {
     public void setScore(Double score) {
         this.score = score;
     }
+    
     @Override
     public int hashCode() {
 	final int prime = 31;
 	int result = 1;
-	result = prime * result + ((card == null) ? 0 : card.hashCode());
 	result = prime * result + ((id == null) ? 0 : id.hashCode());
 	result = prime * result + ((isBlocked == null) ? 0 : isBlocked.hashCode());
 	result = prime * result + ((score == null) ? 0 : score.hashCode());
@@ -69,11 +69,6 @@ public class Bill {
 	if (getClass() != obj.getClass())
 	    return false;
 	Bill other = (Bill) obj;
-	if (card == null) {
-	    if (other.card != null)
-		return false;
-	} else if (!card.equals(other.card))
-	    return false;
 	if (id == null) {
 	    if (other.id != null)
 		return false;
@@ -93,6 +88,6 @@ public class Bill {
     }
     @Override
     public String toString() {
-	return "Bill [id=" + id + ", isBlocked=" + isBlocked + ", score=" + score + ", card=" + card + "]";
+	return "Bill [id=" + id + ", isBlocked=" + isBlocked + ", score=" + score + "]";
     }
 }

@@ -5,12 +5,12 @@ package com.homework.dao;
 
 import com.homework.entities.User;
 
-import java.util.Set;
+import java.util.List;
 
 import com.homework.entities.Card;
 /**
  * @author asd
- *
+ * DAO interface for actor client.
  */
 public interface ClientDAO {
     /**
@@ -18,7 +18,7 @@ public interface ClientDAO {
      * @param user of cards
      * @return - set of cards
      */
-    Set<Card> getCards(User user);
+    List<Card> getCards(User user);
     
     /**
      * Block bill which connected to this card.

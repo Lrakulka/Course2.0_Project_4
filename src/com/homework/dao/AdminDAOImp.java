@@ -3,9 +3,11 @@
  */
 package com.homework.dao;
 
-import java.util.Set;
+import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import com.homework.entities.Bill;
 import com.homework.entities.User;
@@ -24,10 +26,13 @@ public class AdminDAOImp implements AdminDAO {
     /* (non-Javadoc)
      * @see com.homework.dao.AdminDAO#getClients()
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public Set<User> getClients() {
-	// TODO Auto-generated method stub
-	return null;
+    public List<User> getClients() {
+	Session s = this.sessionFactory.openSession();
+	List<User> users = s.createQuery("from User").list();
+	s.close();
+	return users;
     }
 
     /* (non-Javadoc)
@@ -35,7 +40,11 @@ public class AdminDAOImp implements AdminDAO {
      */
     @Override
     public void releaseBill(Bill bill) {
-	// TODO Auto-generated method stub
-	
+	Session session = this.sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        bill.setIsBlocked(false);
+        session.persist(bill);
+        tx.commit();
+        session.close();
     }
 }

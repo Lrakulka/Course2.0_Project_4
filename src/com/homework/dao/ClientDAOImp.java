@@ -3,9 +3,13 @@
  */
 package com.homework.dao;
 
-import java.util.Set;
+import java.util.List;
 
+import javax.management.Query;
+
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import com.homework.entities.Card;
 import com.homework.entities.User;
@@ -24,9 +28,12 @@ public class ClientDAOImp implements ClientDAO {
     /* (non-Javadoc)
      * @see com.homework.dao.ClientDAO#getCards(com.homework.entities.User)
      */
+    // TODO
     @Override
-    public Set<Card> getCards(User user) {
-	// TODO Auto-generated method stub
+    public List<Card> getCards(User user) {
+	Session s = this.sessionFactory.openSession();
+	List<User> users = s.createQuery("from Card C where C.user = ").list();
+	s.close();
 	return null;
     }
 
@@ -35,8 +42,12 @@ public class ClientDAOImp implements ClientDAO {
      */
     @Override
     public void blockCard(Card card) {
-	// TODO Auto-generated method stub
-	
+	Session session = this.sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        card.getBill().setIsBlocked(true);
+        session.persist(card.getBill());
+        tx.commit();
+        session.close();
     }
 
     /* (non-Javadoc)
@@ -44,8 +55,14 @@ public class ClientDAOImp implements ClientDAO {
      */
     @Override
     public void makePayment(Card card, double payment) {
-	// TODO Auto-generated method stub
-	
+	if (!card.getBill().getIsBlocked()) {
+    	    Session session = this.sessionFactory.openSession();
+            Transaction tx = session.beginTransaction();
+            card.getBill().setScore(card.getBill().getScore() - payment);
+            session.persist(card.getBill());
+            tx.commit();
+            session.close();	
+	}
     }
 
     /* (non-Javadoc)
@@ -53,7 +70,13 @@ public class ClientDAOImp implements ClientDAO {
      */
     @Override
     public void fillCard(Card card, double fill) {
-	// TODO Auto-generated method stub
-	
+	if (!card.getBill().getIsBlocked()) {
+    	    Session session = this.sessionFactory.openSession();
+            Transaction tx = session.beginTransaction();
+            card.getBill().setScore(card.getBill().getScore() + fill);
+            session.persist(card.getBill());
+            tx.commit();
+            session.close();	
+	}
     }
 }
