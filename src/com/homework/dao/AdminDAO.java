@@ -4,8 +4,6 @@
 package com.homework.dao;
 
 import java.util.List;
-
-import com.homework.entities.Bill;
 import com.homework.entities.User;
 
 /**
@@ -23,5 +21,5 @@ public interface AdminDAO {
      * Take block off of client bill.
      * @param bill
      */
-    void releaseBill(Bill bill);
+    void releaseBill(int billId);
 }

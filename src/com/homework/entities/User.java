@@ -1,6 +1,5 @@
 package com.homework.entities;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -25,7 +24,7 @@ public class User {
     @Column(name = "pass")    
     private String pass;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Card> cards = new HashSet<>();
+    private Set<Card> cards;
     
     public Set<Card> getCards() {
         return cards;

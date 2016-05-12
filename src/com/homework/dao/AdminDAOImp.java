@@ -5,11 +5,10 @@ package com.homework.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
-import com.homework.entities.Bill;
 import com.homework.entities.User;
 
 /**
@@ -39,11 +38,14 @@ public class AdminDAOImp implements AdminDAO {
      * @see com.homework.dao.AdminDAO#releaseBill(com.homework.entities.Bill)
      */
     @Override
-    public void releaseBill(Bill bill) {
+    public void releaseBill(int billId) {
+	String hql = "UPDATE Bill set isBlocked = false "  + 
+                "WHERE id = :billId";
 	Session session = this.sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        bill.setIsBlocked(false);
-        session.persist(bill);
+        Query query = session.createQuery(hql);
+        query.setParameter("billId", billId);
+        query.executeUpdate();
         tx.commit();
         session.close();
     }
