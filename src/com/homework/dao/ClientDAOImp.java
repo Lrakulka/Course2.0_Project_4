@@ -12,7 +12,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.homework.entities.Card;
-import com.homework.entities.User;
+import com.homework.entities.Actor;
 
 /**
  * @author asd
@@ -30,12 +30,12 @@ public class ClientDAOImp implements ClientDAO {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public User getUser(String name, String pass) {
+    public Actor getUser(String name, String pass) {
 	Session s = this.sessionFactory.openSession();
-	Query query = s.createQuery("FROM User U WHERE U.name=:name AND U.pass=:pass");
+	Query query = s.createQuery("FROM Actor A WHERE A.name=:name AND A.pass=:pass");
 	query.setParameter("name", name);
 	query.setParameter("pass", pass);
-	List<User> users = query.list();
+	List<Actor> users = query.list();
 	s.close();
 	if (users.size() > 1 || users.isEmpty()) {
 	    return null;
@@ -48,7 +48,7 @@ public class ClientDAOImp implements ClientDAO {
      * @see com.homework.dao.ClientDAO#blockCard(com.homework.entities.Card)
      */
     @Override
-    public Card blockCard(User user, int cardId) {
+    public Card blockCard(Actor user, int cardId) {
 	Card card = check(user, cardId);
 	if (card != null) {
     	    Session session = this.sessionFactory.openSession();
@@ -65,7 +65,7 @@ public class ClientDAOImp implements ClientDAO {
      * @see com.homework.dao.ClientDAO#makePayment(com.homework.entities.Card, double)
      */
     @Override
-    public Card makePayment(User user, int cardId, double payment) {
+    public Card makePayment(Actor user, int cardId, double payment) {
 	Card card = check(user, cardId);
 	if (card != null) {
 	    if (!card.getBill().getIsBlocked()) {
@@ -84,7 +84,7 @@ public class ClientDAOImp implements ClientDAO {
      * @see com.homework.dao.ClientDAO#fillCard(com.homework.entities.Card, double)
      */
     @Override
-    public Card fillCard(User user, int cardId, double fill) {
+    public Card fillCard(Actor user, int cardId, double fill) {
 	Card card = check(user, cardId);
 	if (card != null) {
 	    if (!card.getBill().getIsBlocked()) {
@@ -103,7 +103,7 @@ public class ClientDAOImp implements ClientDAO {
      * @see com.homework.dao.ClientDAO#check(com.homework.entities.User, int)
      */
     @Override
-    public Card check(User user, int cardId) {
+    public Card check(Actor user, int cardId) {
 	Card card = null;
 	try {
 	    card = user.getCards().stream().filter(c -> {

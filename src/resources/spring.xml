@@ -5,21 +5,27 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
-
+	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  		<property name="location">
+    		<value>resources/app.config</value>
+  		</property>
+	</bean>
+	
  	<!-- S3PO -->
  	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
-        <property name="driverClass" value="com.mysql.jdbc.Driver" />
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/payments" />
-        <property name="user" value="root" />
-        <property name="password" value="0000" /> 
+        <property name="driverClass" value="${database.driverClass}" />
+        <property name="jdbcUrl" value="${database.jdbcUrl}" />
+        <property name="user" value="${database.user}" />
+        <property name="password" value="${database.password}" /> 
 
         <!-- these are C3P0 properties -->
-        <property name="minPoolSize" value="5" />
-        <property name="maxPoolSize" value="20" />
-        <property name="maxIdleTime" value="300" />
-        <property name="idleConnectionTestPeriod" value="3000" />
-        <property name="maxStatements" value="50" />
+        <property name="minPoolSize" value="${s3po.minPoolSize}" />
+        <property name="maxPoolSize" value="${s3po.maxPoolSize}" />
+        <property name="maxIdleTime" value="${s3po.maxIdleTime}" />
+        <property name="idleConnectionTestPeriod" value="${s3po.idleConnectionTestPeriod}" />
+        <property name="maxStatements" value="${s3po.maxStatements}" />
 	</bean>
 	
 	<!-- Hibernate 4 SessionFactory Bean definition -->
@@ -28,14 +34,15 @@
         <property name="dataSource" ref="dataSource" />
         <property name="annotatedClasses">
             <list>
-                <value>com.homework.entities.Bill</value>
-                <value>com.homework.entities.Card</value>
-                <value>com.homework.entities.User</value>
+                <value>${Bill}</value>
+                <value>${Card}</value>
+                <value>${Actor}</value>
             </list>
         </property>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
             </props>
         </property>
     </bean>

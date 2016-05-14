@@ -4,7 +4,7 @@
 package com.homework.dao;
 
 import java.util.List;
-import com.homework.entities.User;
+import com.homework.entities.Actor;
 
 /**
  * @author asd
@@ -15,7 +15,7 @@ public interface AdminDAO {
      * Return set of all clients.
      * @return set of clients
      */
-    List<User> getClients();
+    List<Actor> getClients();
     
     /**
      * Take block off of client bill.

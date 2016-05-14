@@ -9,7 +9,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import com.homework.entities.User;
+import com.homework.entities.Actor;
 
 /**
  * @author asd
@@ -27,9 +27,9 @@ public class AdminDAOImp implements AdminDAO {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public List<User> getClients() {
+    public List<Actor> getClients() {
 	Session s = this.sessionFactory.openSession();
-	List<User> users = s.createQuery("from User").list();
+	List<Actor> users = s.createQuery("from Actor").list();
 	s.close();
 	return users;
     }

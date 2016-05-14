@@ -17,14 +17,20 @@ public class Card {
     @GeneratedValue
     @Column(name = "id")
     private Integer id;
-    @Column(name = "name")
+    @Column(name = "card_name")
     private String name;
     @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "id_bill")
     private Bill bill;
     @ManyToOne()
-    @JoinColumn(name = "id_user")
-    private User user;
+    @JoinColumn(name = "id_actor")
+    private Actor actor;
+    
+    public Card() {}
+    
+    public Card(String name) {
+	this.name = name;
+    }
     
     public Bill getBill() {
         return bill;
@@ -32,11 +38,11 @@ public class Card {
     public void setBill(Bill bill) {
         this.bill = bill;
     }
-    public User getUser() {
-        return user;
+    public Actor getUser() {
+        return actor;
     }
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(Actor user) {
+        this.actor = user;
     }
     public Integer getId() {
         return id;

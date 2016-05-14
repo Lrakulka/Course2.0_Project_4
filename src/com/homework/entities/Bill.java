@@ -26,6 +26,12 @@ public class Bill {
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "bill", cascade = CascadeType.ALL)
     private Card card;
     
+    public Bill() {}
+    
+    public Bill(boolean isBlocked, double score) {
+	this.isBlocked = isBlocked;
+	this.score = score;
+    }
     public Card getCard() {
         return card;
     }
