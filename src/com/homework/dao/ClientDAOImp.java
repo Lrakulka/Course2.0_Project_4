@@ -54,7 +54,7 @@ public class ClientDAOImp implements ClientDAO {
     	    Session session = this.sessionFactory.openSession();
             Transaction tx = session.beginTransaction();
             card.getBill().setIsBlocked(true);
-            session.persist(card.getBill());
+            session.update(card.getBill());
             tx.commit();
             session.close();
 	}
@@ -72,7 +72,7 @@ public class ClientDAOImp implements ClientDAO {
         	Session session = this.sessionFactory.openSession();
                 Transaction tx = session.beginTransaction();
                 card.getBill().setScore(card.getBill().getScore() - payment);
-                session.persist(card.getBill());
+                session.update(card.getBill());
                 tx.commit();
                 session.close();	
 	    }
@@ -91,7 +91,7 @@ public class ClientDAOImp implements ClientDAO {
         	Session session = this.sessionFactory.openSession();
                 Transaction tx = session.beginTransaction();
                 card.getBill().setScore(card.getBill().getScore() + fill);
-                session.persist(card.getBill());
+                session.update(card.getBill());
                 tx.commit();
                 session.close();	
 	    }
