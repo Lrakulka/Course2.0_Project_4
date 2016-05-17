@@ -9,16 +9,20 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import com.homework.entities.Actor;
 
 /**
  * @author asd
  *
  */
+@Repository("adminDAO")
 public class AdminDAOImp implements AdminDAO {
     private SessionFactory sessionFactory;
     
-    public AdminDAOImp(SessionFactory sessionFactory) {
+    @Autowired(required=true)
+    public AdminDAOImp(final SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 

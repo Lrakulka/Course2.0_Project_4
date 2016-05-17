@@ -10,18 +10,21 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import com.homework.entities.Card;
 import com.homework.entities.Actor;
 
 /**
  * @author asd
- *
+ * 
  */
+@Repository("clientDAO")
 public class ClientDAOImp implements ClientDAO {
     private SessionFactory sessionFactory;
     
-    public ClientDAOImp(SessionFactory sessionFactory) {
+    @Autowired(required=true)
+    public ClientDAOImp(final SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 

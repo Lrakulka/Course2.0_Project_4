@@ -8,7 +8,7 @@
 	
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
   		<property name="location">
-    		<value>resources/app.config</value>
+    		<value>test/app.config</value>
   		</property>
 	</bean>
 	
@@ -16,7 +16,7 @@
  	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
         <property name="driverClass" value="${database.driverClass}" />
-        <property name="jdbcUrl" value="${database.jdbcUrl}" />
+        <property name="jdbcUrl" value="${database.test.jdbcUrl}" />
         <property name="user" value="${database.user}" />
         <property name="password" value="${database.password}" /> 
 
@@ -41,8 +41,9 @@
         </property>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.show_sql">${hibernate.test.show_sql}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.test.hbm2ddl.auto}</prop>
+                <prop key="hibernate.hbm2ddl.import_files">${hibernate.test.hbm2ddl.import_files}</prop>
             </props>
         </property>
     </bean>

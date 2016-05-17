@@ -4,11 +4,6 @@
 package test;
 
 import static org.junit.Assert.*;
-
-import java.io.IOException;
-import java.nio.DoubleBuffer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -42,7 +37,7 @@ public class JUnitTestDAO {
     
     @BeforeClass
     public static void initTests() {
-	context = new ClassPathXmlApplicationContext("resources/springTest.xml");
+	context = new ClassPathXmlApplicationContext("test/springTest.xml");
 	factory = (SessionFactory) context.getBean("hibernate4AnnotatedSessionFactory");
         adminDAO = context.getBean(AdminDAOImp.class);
         clientDAO = context.getBean(ClientDAOImp.class);
