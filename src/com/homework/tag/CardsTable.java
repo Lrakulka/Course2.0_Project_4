@@ -36,7 +36,7 @@ public class CardsTable extends TagSupport {
     
     public int doStartTag() {
 	StringBuilder tableBuilder = new StringBuilder(
-		"<form name=\"CardTable\" action=\"/cardTable\" " +
+		"<form name=\"CardTable\" action=\"/Project_4/cardTable\" " +
 			"method=\"post\">" +
 			"<table border=\"2\" cellpadding=\"8\">");
 	try {
