@@ -44,7 +44,7 @@ public class CardsTable extends TagSupport {
 		tableBuilder.append("<tr><td>" + card.getName() + 
 			"</td><td>" +
 			"<p align=\"center\">" + card.getBill().getScore() + "</p>" +
-			"<p><input type=\"hidden\" name=\"cardsId\" " +
+			"<p><input type=\"hidden\" name=\"cardId\" " +
 			"value=\"" + card.getId() + "\" /></p>" +
 			"<p><button name=\"fillBillId\" >" + buttonFillInfo + 
 			"</button>" + "<button name=\"makePayment\" >" + 
