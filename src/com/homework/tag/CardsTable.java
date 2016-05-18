@@ -46,7 +46,7 @@ public class CardsTable extends TagSupport {
 			"<p align=\"center\">" + card.getBill().getScore() + "</p>" +
 			"<p><input type=\"hidden\" name=\"cardId\" " +
 			"value=\"" + card.getId() + "\" /></p>" +
-			"<p><button name=\"fillBillId\" >" + buttonFillInfo + 
+			"<p><button name=\"fillBill\" >" + buttonFillInfo + 
 			"</button>" + "<button name=\"makePayment\" >" + 
 			buttonMakePaymentInfo + "</button></p>" +
 			"</td><td><p>" + (card.getBill().getIsBlocked() ? 
