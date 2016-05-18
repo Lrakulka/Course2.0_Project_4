@@ -28,7 +28,7 @@ public class ClientsTable extends TagSupport {
     
     public int doStartTag() {
 	StringBuilder tableBuilder = new StringBuilder(
-		"<form name=\"ClientTable\" action=\"clientTable\" " +
+		"<form name=\"ClientTable\" action=\"/clientTable\" " +
 			"method=\"post\">" +
 			"<table border=\"2\" cellpadding=\"8\">");
 	int i;
