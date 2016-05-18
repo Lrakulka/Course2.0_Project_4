@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Admin room</title>
 </head>
 <body>
-<p1>${clients}</p1>
+<tables:clientTable buttonInfo="UnBlock" clients="${clients}"/>
 </body>
 </html>

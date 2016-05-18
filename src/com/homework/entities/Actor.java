@@ -1,6 +1,6 @@
 package com.homework.entities;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,7 +24,7 @@ public class Actor {
     @Column(name = "pass")    
     private String pass;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "actor", cascade = CascadeType.ALL)
-    private Set<Card> cards;
+    private List<Card> cards;
     
     public Actor() {}
     
@@ -33,10 +33,10 @@ public class Actor {
 	this.pass = pass;
     }
     
-    public Set<Card> getCards() {
+    public List<Card> getCards() {
         return cards;
     }
-    public void setCards(Set<Card> cards) {
+    public void setCards(List<Card> cards) {
         this.cards = cards;
     }
     public Integer getId() {

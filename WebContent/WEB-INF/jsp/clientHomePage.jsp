@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p1>${cards}</p1>
+<tables:cardTable buttonFillInfo="Fill" buttonBlockInfo="Block" buttonMakePaymentInfo="Pay" cards="${cards}"/>
 </body>
 </html>
