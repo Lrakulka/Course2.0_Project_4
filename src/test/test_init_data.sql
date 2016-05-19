@@ -75,6 +75,26 @@ LOCK TABLES `card` WRITE;
 INSERT INTO `card` VALUES (1,'card',1,1),(2,'card2',1,2),(3,'card3',2,3),(4,'card4',3,4);
 /*!40000 ALTER TABLE `card` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `actor_roles`
+--
+
+DROP TABLE IF EXISTS `actor_roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `actor_roles` (`id` int(10) unsigned NOT NULL AUTO_INCREMENT, `actor_id` int(10) unsigned NOT NULL,`role` varchar(45) NOT NULL,PRIMARY KEY (`id`),UNIQUE KEY `uni_id_role` (`role`,`actor_id`),KEY `fk_actor_roles_idx` (`actor_id`),CONSTRAINT `fk_userid` FOREIGN KEY (`actor_id`) REFERENCES `actor` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `actor_roles`
+--
+
+LOCK TABLES `actor_roles` WRITE;
+/*!40000 ALTER TABLE `actor_roles` DISABLE KEYS */;
+INSERT INTO `actor_roles` VALUES (1,1,'ROLE_ADMIN'),(5,4,'ROLE_ADMIN'),(2,1,'ROLE_CLIENT'),(3,2,'ROLE_CLIENT'),(4,3,'ROLE_CLIENT');
+/*!40000 ALTER TABLE `actor_roles` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
