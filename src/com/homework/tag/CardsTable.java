@@ -43,7 +43,7 @@ public class CardsTable extends TagSupport {
 			"</td><td>" +
 			"<p align=\"center\">" + card.getBill().getScore() + "</p></td>" +
 			"<td><form name=\"CardTable\" action=\"/Project_4/fillClientBill\" " +
-			"method=\"post\">" +			
+			"method=\"post\">" +		
 			"<p align=\"center\"><input size=\"10\" type=\"text\" name=\"moneyCount\" /></p>" +
 			"<p align=\"center\"><button name=\"fillBill\" value=\"" + 
 			card.getId() + "\">" + buttonFillInfo + 
