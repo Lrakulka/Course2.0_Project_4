@@ -24,6 +24,8 @@ public class Actor {
     @Column(name = "pass")    
     private String pass;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "actor", cascade = CascadeType.ALL)
+    private List<ActorRole> actorRoles;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "actor", cascade = CascadeType.ALL)
     private List<Card> cards;
     
     public Actor() {}
@@ -31,6 +33,14 @@ public class Actor {
     public Actor(String name, String pass) {
 	this.name = name;
 	this.pass = pass;
+    }
+    
+    public List<ActorRole> getActorRole() {
+        return actorRoles;
+    }
+
+    public void setActorRole(List<ActorRole> actorRoles) {
+        this.actorRoles = actorRoles;
     }
     
     public List<Card> getCards() {
@@ -51,10 +61,10 @@ public class Actor {
     public void setName(String name) {
         this.name = name;
     }
-    public String getPwd() {
+    public String getPass() {
         return pass;
     }
-    public void setPwd(String pwd) {
+    public void setPass(String pwd) {
         this.pass = pwd;
     }
     

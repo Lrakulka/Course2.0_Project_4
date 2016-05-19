@@ -22,7 +22,7 @@ public class Card {
     @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "id_bill")
     private Bill bill;
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "id_actor")
     private Actor actor;
     

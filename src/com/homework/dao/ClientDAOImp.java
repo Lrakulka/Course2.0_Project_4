@@ -12,6 +12,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.homework.entities.Card;
 import com.homework.entities.Actor;
 

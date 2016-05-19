@@ -5,11 +5,10 @@ package com.homework.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,16 +16,16 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="actor")
+@Table(name="actor_role")
 public class ActorRole {
     @Id
     @GeneratedValue
     @Column(name = "id")
     private Integer id;
     @Column(name = "role")
-    private String role;
-    @OneToOne(fetch=FetchType.EAGER)
+    private String role;    
     @JoinColumn(name = "actor_id")
+    @ManyToOne
     private Actor actor;
     
     public Integer getId() {

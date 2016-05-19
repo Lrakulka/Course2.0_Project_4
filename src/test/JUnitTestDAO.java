@@ -87,7 +87,7 @@ public class JUnitTestDAO {
     public void getUser() {
 	List <Actor> actors = adminDAO.getClients();
 	actors.stream().forEach(a -> {
-	    assertTrue(actors.contains(clientDAO.getUser(a.getName(), a.getPwd())));
+	    assertTrue(actors.contains(clientDAO.getUser(a.getName(), a.getPass())));
 	});
     }
     
