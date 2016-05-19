@@ -36,26 +36,37 @@ public class CardsTable extends TagSupport {
     
     public int doStartTag() {
 	StringBuilder tableBuilder = new StringBuilder(
-		"<form name=\"CardTable\" action=\"/Project_4/cardTable\" " +
-			"method=\"post\">" +
-			"<table border=\"2\" cellpadding=\"8\">");
+		"<table border=\"2\" cellpadding=\"8\">");
 	try {
 	    for (Card card : cards) {
 		tableBuilder.append("<tr><td>" + card.getName() + 
 			"</td><td>" +
-			"<p align=\"center\">" + card.getBill().getScore() + "</p>" +
-			"<p><input type=\"hidden\" name=\"cardId\" " +
-			"value=\"" + card.getId() + "\" /></p>" +
-			"<p><button name=\"fillBill\" >" + buttonFillInfo + 
-			"</button>" + "<button name=\"makePayment\" >" + 
-			buttonMakePaymentInfo + "</button></p>" +
+			"<p align=\"center\">" + card.getBill().getScore() + "</p></td>" +
+			"<td><form name=\"CardTable\" action=\"/Project_4/fillClientBill\" " +
+			"method=\"post\">" +			
+			"<p align=\"center\"><input size=\"10\" type=\"text\" name=\"moneyCount\" /></p>" +
+			"<p align=\"center\"><button name=\"fillBill\" value=\"" + 
+			card.getId() + "\">" + buttonFillInfo + 
+			"</button></form></td>" + 
+			"<td><form name=\"CardTable\" action=\"/Project_4/makeClientPayment\" " +
+			"method=\"post\">" +			
+			"<p align=\"center\"><input size=\"10\" type=\"text\" name=\"moneyCount\" /></p>" +
+			"<p align=\"center\"><button name=\"makePayment\" value=\"" + 
+			card.getId() + "\">" + buttonMakePaymentInfo + 
+			"</button></form></td></p>" +
 			"</td><td><p>" + (card.getBill().getIsBlocked() ? 
-				"Blocked" : "Not blocked") + 
-			"</p><p align=\"center\"><button name=\"blockBill\" value=\"" + 
-			card.getId() + "\">" + buttonBlockInfo + "</button></p></td>");		
+				"Blocked" : "Not blocked"));
+			if (!card.getBill().getIsBlocked()) {
+			    tableBuilder.append("<form name=\"CardTable\" " +
+			    		"action=\"/Project_4/blockClientBill\" " +
+			    		"method=\"post\">" + "</p><p align=\"center\">" +
+					"<button name=\"blockBill\" value=\"" + 
+					card.getId() + "\">" + buttonBlockInfo + 
+					"</button></p></form></td>");	
+			}
 		tableBuilder.append("</tr>");
 	    }
-	    tableBuilder.append("</table></form>");
+	    tableBuilder.append("</table>");
 	    pageContext.getOut().write(tableBuilder.toString());
 	} catch (Exception e) {
 	   // LOGGER.error("Problem in lecture table(tag)", e);
