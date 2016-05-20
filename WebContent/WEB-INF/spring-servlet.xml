@@ -80,7 +80,7 @@
 		<security:intercept-url pattern="/client" access="hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')" />
 		
 		<!-- enable csrf protection -->
-		<security:csrf />		
+		<security:csrf />
 	</security:http>
 	
 	<security:authentication-manager>

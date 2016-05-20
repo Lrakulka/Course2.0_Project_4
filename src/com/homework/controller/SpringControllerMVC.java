@@ -28,6 +28,14 @@ public class SpringControllerMVC {
 	this.clientDAO = clientDAO;
     }
     
+    @RequestMapping(value = "/**")
+    public ModelAndView welcome() {
+	ModelAndView model = new ModelAndView();
+	model.setViewName("welcome");	
+	
+	return model;
+    }
+    
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView adminHomePage() {
 	ModelAndView model = new ModelAndView();
