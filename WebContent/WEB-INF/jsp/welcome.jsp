@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>Hello it's the fourth project of EPAM course 2016</h2>
-<h3>Available pages</h3>
-<a href="/Project_4/admin"> Admin home room</a>
+<h2>Hello, it's the fourth project of EPAM course 2016</h2>
+<h3>Available pages:</h3>
+<p><a href="/Project_4/admin"> Admin home room</a></p>
 <a href="/Project_4/client"> Client home room</a>
 </body>
 </html>
