@@ -17,7 +17,17 @@ public class CardsTable extends TagSupport {
     private String buttonMakePaymentInfo;
     private String buttonBlockInfo;
     private List<Card> cards;
+    private String parameterName;
+    private String token;
 
+    public void setParameterName(String parameterName) {
+        this.parameterName = parameterName;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+    
     public void setButtonFillInfo(String buttonFillInfo) {
         this.buttonFillInfo = buttonFillInfo;
     }
@@ -44,12 +54,16 @@ public class CardsTable extends TagSupport {
 			"<p align=\"center\">" + card.getBill().getScore() + "</p></td>" +
 			"<td><form name=\"CardTable\" action=\"/Project_4/fillClientBill\" " +
 			"method=\"post\">" +		
+			"<input type=\"hidden\" name=\"" + parameterName +"\"" +
+			"	value=\"" + token + "\" />" +
 			"<p align=\"center\"><input size=\"10\" type=\"text\" name=\"moneyCount\" /></p>" +
 			"<p align=\"center\"><button name=\"fillBill\" value=\"" + 
 			card.getId() + "\">" + buttonFillInfo + 
 			"</button></form></td>" + 
 			"<td><form name=\"CardTable\" action=\"/Project_4/makeClientPayment\" " +
-			"method=\"post\">" +			
+			"method=\"post\">" +	
+			"<input type=\"hidden\" name=\"" + parameterName +"\"" +
+			"	value=\"" + token + "\" />" +
 			"<p align=\"center\"><input size=\"10\" type=\"text\" name=\"moneyCount\" /></p>" +
 			"<p align=\"center\"><button name=\"makePayment\" value=\"" + 
 			card.getId() + "\">" + buttonMakePaymentInfo + 
@@ -59,7 +73,10 @@ public class CardsTable extends TagSupport {
 			if (!card.getBill().getIsBlocked()) {
 			    tableBuilder.append("<form name=\"CardTable\" " +
 			    		"action=\"/Project_4/blockClientBill\" " +
-			    		"method=\"post\">" + "</p><p align=\"center\">" +
+			    		"method=\"post\">" + 
+			    		"<input type=\"hidden\" name=\"" + 
+			    		parameterName +"\" value=\"" + token + "\" />" + 
+			    		"</p><p align=\"center\">" +
 					"<button name=\"blockBill\" value=\"" + 
 					card.getId() + "\">" + buttonBlockInfo + 
 					"</button></p></form></td>");	

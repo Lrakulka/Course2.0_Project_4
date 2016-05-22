@@ -9,7 +9,8 @@
 <title>Admin room</title>
 </head>
 <body>
-<tables:clientTable buttonInfo="UnBlock" clients="${clients}"/>
+<tables:clientTable buttonInfo="UnBlock" clients="${clients}"
+ parameterName="${_csrf.parameterName}" token="${_csrf.token}" />
 
 <c:url value="/j_spring_security_logout" var="logoutUrl" />
 <!-- csrt for log out-->

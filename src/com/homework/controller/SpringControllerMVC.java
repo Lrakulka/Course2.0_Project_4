@@ -61,7 +61,7 @@ public class SpringControllerMVC {
     }
   
     //for 403 access denied page
-    @RequestMapping(value = "/403", method = RequestMethod.GET)
+    @RequestMapping(value = "/403**", method = RequestMethod.GET)
     public ModelAndView accesssDenied(Principal principal) {
 	ModelAndView model = new ModelAndView();
 	// check if user is login

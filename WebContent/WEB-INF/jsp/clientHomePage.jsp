@@ -9,7 +9,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<tables:cardTable buttonFillInfo="Fill" buttonBlockInfo="Block" buttonMakePaymentInfo="Pay" cards="${cards}"/>
+<tables:cardTable buttonFillInfo="Fill" buttonBlockInfo="Block" 
+buttonMakePaymentInfo="Pay" cards="${cards}"
+parameterName="${_csrf.parameterName}" token="${_csrf.token}"/>
 <c:url value="/j_spring_security_logout" var="logoutUrl" />
 <!-- csrt for log out-->
 <form action="${logoutUrl}" method="post" id="logoutForm">

@@ -17,7 +17,17 @@ public class ClientsTable extends TagSupport {
     private static final long serialVersionUID = 8721266929256929800L;
     private String buttonInfo;
     private List<Actor> clients;
-    
+    private String parameterName;
+    private String token;
+
+    public void setParameterName(String parameterName) {
+        this.parameterName = parameterName;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public void setButtonInfo(String buttonInfo) {
 	this.buttonInfo = buttonInfo;
     }
@@ -29,8 +39,9 @@ public class ClientsTable extends TagSupport {
     public int doStartTag() {
 	StringBuilder tableBuilder = new StringBuilder(
 		"<form name=\"ClientTable\" action=\"/Project_4/releaseClientBill\" " +
-			"method=\"post\">" +
-			"<table border=\"2\" cellpadding=\"8\">");
+			"method=\"post\">" + "<table border=\"2\" cellpadding=\"8\">" +
+			"<input type=\"hidden\" name=\"" + parameterName +"\"" +
+			"	value=\"" + token + "\" />");
 	int i;
 	try {
 	    for (Actor actor : clients) {
