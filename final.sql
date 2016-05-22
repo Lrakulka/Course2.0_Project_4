@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `actor`;
 CREATE TABLE `actor` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `act_name` varchar(45) NOT NULL,
-  `pass` varchar(45) NOT NULL,
+  `pass` varchar(60) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `act_name_UNIQUE` (`act_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
@@ -37,7 +37,12 @@ CREATE TABLE `actor` (
 
 LOCK TABLES `actor` WRITE;
 /*!40000 ALTER TABLE `actor` DISABLE KEYS */;
-INSERT INTO `actor` VALUES (1,'Sasha','123'),(2,'Masha','123'),(3,'Sasha2','123'),(4,'Masha2','123');
+INSERT INTO `actor` VALUES (1,'Sasha','$2a$10$Ogw1kABgMFEdtq6GPwE9H.oXbCUGo3NyCjqb2f7.4H7Y9gpC5KyCq
+'),(2,'Masha','$2a$10$Ogw1kABgMFEdtq6GPwE9H.oXbCUGo3NyCjqb2f7.4H7Y9gpC5KyCq
+'),(3,'Sasha2','$2a$10$Ogw1kABgMFEdtq6GPwE9H.oXbCUGo3NyCjqb2f7.4H7Y9gpC5KyCq
+'),(4,'Masha2','$2a$10$Ogw1kABgMFEdtq6GPwE9H.oXbCUGo3NyCjqb2f7.4H7Y9gpC5KyCq
+');
+/*bCrypt(123) = [$2a$10$Ogw1kABgMFEdtq6GPwE9H.oXbCUGo3NyCjqb2f7.4H7Y9gpC5KyCq] */
 /*!40000 ALTER TABLE `actor` ENABLE KEYS */;
 UNLOCK TABLES;
 

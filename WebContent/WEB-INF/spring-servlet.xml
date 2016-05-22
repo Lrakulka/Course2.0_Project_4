@@ -85,6 +85,7 @@
 	
 	<security:authentication-manager>
 		<security:authentication-provider user-service-ref="myActorDetailsService" >
+			<security:password-encoder hash="bcrypt" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 </beans>
