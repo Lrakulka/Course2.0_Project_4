@@ -19,7 +19,17 @@ public class CardsTable extends TagSupport {
     private List<Card> cards;
     private String parameterName;
     private String token;
+    private String textBlocked;
+    private String textUnBlocked;
+    
+    public void setTextBlocked(String textBlocked) {
+        this.textBlocked = textBlocked;
+    }
 
+    public void setTextUnBlocked(String textUnBlocked) {
+        this.textUnBlocked = textUnBlocked;
+    }
+    
     public void setParameterName(String parameterName) {
         this.parameterName = parameterName;
     }
@@ -69,7 +79,7 @@ public class CardsTable extends TagSupport {
 			card.getId() + "\">" + buttonMakePaymentInfo + 
 			"</button></form></td></p>" +
 			"</td><td><p>" + (card.getBill().getIsBlocked() ? 
-				"Blocked" : "Not blocked"));
+				textBlocked : textUnBlocked));
 			if (!card.getBill().getIsBlocked()) {
 			    tableBuilder.append("<form name=\"CardTable\" " +
 			    		"action=\"/Project_4/blockClientBill\" " +

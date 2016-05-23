@@ -26,6 +26,18 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>textBlocked</name>
+			<required>true</required>
+			<description>Msg if Blocked</description>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>textUnBlocked</name>
+			<required>true</required>
+			<description>Msg if un blocked</description>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>parameterName</name>
 			<required>true</required>
 			<description>Provide csrf protection</description>
@@ -65,6 +77,18 @@
 			<name>buttonBlockInfo</name>
 			<required>true</required>
 			<description>Provide a localization for button message</description>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>textBlocked</name>
+			<required>true</required>
+			<description>Msg if Blocked</description>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>textUnBlocked</name>
+			<required>true</required>
+			<description>Msg if un blocked</description>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>

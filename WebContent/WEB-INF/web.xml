@@ -23,15 +23,12 @@
    <servlet-mapping>
       <servlet-name>DispatcherServlet</servlet-name>
       <url-pattern>/</url-pattern>
-   </servlet-mapping>
-   
-   
+   </servlet-mapping>   
    	
    	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
-
 
   <!-- Loads Spring Security config file -->
 	<context-param>

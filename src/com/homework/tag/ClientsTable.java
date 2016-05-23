@@ -19,6 +19,16 @@ public class ClientsTable extends TagSupport {
     private List<Actor> clients;
     private String parameterName;
     private String token;
+    private String textBlocked;
+    private String textUnBlocked;
+    
+    public void setTextBlocked(String textBlocked) {
+        this.textBlocked = textBlocked;
+    }
+
+    public void setTextUnBlocked(String textUnBlocked) {
+        this.textUnBlocked = textUnBlocked;
+    }
 
     public void setParameterName(String parameterName) {
         this.parameterName = parameterName;
@@ -60,8 +70,8 @@ public class ClientsTable extends TagSupport {
 		    }
 		    tableBuilder.append("<td>" + card.getName() +
 			"</td><td>" + card.getBill().getScore() + 
-			"</td><td>" + (card.getBill().getIsBlocked() ? "Blocked" :
-			    "Not blocked") + "</td>");
+			"</td><td>" + (card.getBill().getIsBlocked() ? textBlocked :
+			    textUnBlocked) + "</td>");
 		    if (card.getBill().getIsBlocked()) {
 			tableBuilder.append("<td><button name=\"billBlockId\" value=\"" +
 				card.getBill().getId() +

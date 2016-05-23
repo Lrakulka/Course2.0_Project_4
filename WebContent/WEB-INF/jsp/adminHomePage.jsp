@@ -2,15 +2,22 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="tables" uri="/WEB-INF/tables.tld"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Admin room</title>
+<title><spring:message code="admin.label.title" /></title>
 </head>
 <body>
-<tables:clientTable buttonInfo="UnBlock" clients="${clients}"
- parameterName="${_csrf.parameterName}" token="${_csrf.token}" />
+<spring:message code="admin.button.unblock" var="unblock" />
+<spring:message code="admin.label.blocked" var="blocked" />
+<spring:message code="admin.label.unblocked" var="unblocked" />
+<tables:clientTable clients="${clients}" 
+buttonInfo="${unblock}"  
+textBlocked="${blocked}"  
+textUnBlocked="${unblocked}" 
+parameterName="${_csrf.parameterName}" token="${_csrf.token}" />
 
 <c:url value="/j_spring_security_logout" var="logoutUrl" />
 <!-- csrt for log out-->
@@ -26,8 +33,9 @@
 </script>
 <c:if test="${pageContext.request.userPrincipal.name != null}">
 	<h2>
-		Welcome : ${pageContext.request.userPrincipal.name} | <a
-			href="javascript:formSubmit()"> Logout</a>
+		<spring:message code="admin.label.welcome" /> : 
+			${pageContext.request.userPrincipal.name} | <a
+			href="javascript:formSubmit()"><spring:message code="admin.label.logout" /></a>
 	</h2>
 </c:if>
 
