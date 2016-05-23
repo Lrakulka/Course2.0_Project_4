@@ -40,7 +40,7 @@ LOCK TABLES `actor` WRITE;
 INSERT INTO `actor` VALUES (1,'Sasha','$2a$10$Ogw1kABgMFEdtq6GPwE9H.oXbCUGo3NyCjqb2f7.4H7Y9gpC5KyCq
 '),(2,'Masha','$2a$10$Ogw1kABgMFEdtq6GPwE9H.oXbCUGo3NyCjqb2f7.4H7Y9gpC5KyCq
 '),(3,'Sasha2','$2a$10$Ogw1kABgMFEdtq6GPwE9H.oXbCUGo3NyCjqb2f7.4H7Y9gpC5KyCq
-'),(4,'Masha2','$2a$10$Ogw1kABgMFEdtq6GPwE9H.oXbCUGo3NyCjqb2f7.4H7Y9gpC5KyCq
+'),(4,'Маша2','$2a$10$Ogw1kABgMFEdtq6GPwE9H.oXbCUGo3NyCjqb2f7.4H7Y9gpC5KyCq
 ');
 /*bCrypt(123) = [$2a$10$Ogw1kABgMFEdtq6GPwE9H.oXbCUGo3NyCjqb2f7.4H7Y9gpC5KyCq] */
 /*!40000 ALTER TABLE `actor` ENABLE KEYS */;
