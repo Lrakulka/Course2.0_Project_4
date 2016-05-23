@@ -25,8 +25,7 @@ public class ActorDaoImpl implements ActorDAO {
 	List<Actor> users = new ArrayList<Actor>();
 	Session session = sessionFactory.openSession();
 	Transaction tx = session.beginTransaction();
-	users = session
-		.createQuery("from Actor where act_name=?")
+	users = session.createQuery("from Actor where name=?")
 		.setParameter(0, actorName).list();
 	tx.commit();
         session.close();
