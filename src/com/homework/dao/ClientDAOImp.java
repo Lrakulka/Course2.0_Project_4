@@ -6,6 +6,7 @@ package com.homework.dao;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,6 +23,7 @@ import com.homework.entities.Actor;
  */
 @Repository("clientDAO")
 public class ClientDAOImp implements ClientDAO {
+    private static final Logger logger = Logger.getLogger(ClientDAOImp.class);
     private SessionFactory sessionFactory;
     
     @Autowired(required=true)
@@ -35,12 +37,16 @@ public class ClientDAOImp implements ClientDAO {
     @SuppressWarnings("unchecked")
     @Override
     public Actor getUser(String name, String pass) {
+	logger.info(new StringBuilder("Entering name=").
+		append(name.charAt(0)).append("*** pass=***"));
 	Session s = this.sessionFactory.openSession();
 	Query query = s.createQuery("FROM Actor A WHERE A.name=:name AND A.pass=:pass");
 	query.setParameter("name", name);
 	query.setParameter("pass", pass);
 	List<Actor> users = query.list();
 	s.close();
+	logger.info(new StringBuilder("Leaving usersCount=").
+		append(users.size()));
 	if (users.size() > 1 || users.isEmpty()) {
 	    return null;
 	} else {
@@ -53,6 +59,8 @@ public class ClientDAOImp implements ClientDAO {
      */
     @Override
     public Card blockCard(Actor user, int cardId) {
+	logger.info(new StringBuilder("Entering name=").
+		append(user.getName().charAt(0)).append("*** cardId=" + cardId));
 	Card card = check(user, cardId);
 	if (card != null) {
     	    Session session = this.sessionFactory.openSession();
@@ -62,6 +70,12 @@ public class ClientDAOImp implements ClientDAO {
             tx.commit();
             session.close();
 	}
+	if (card == null) {
+	    logger.info("Leaving card=null");
+	} else {
+	    logger.info(new StringBuilder("Leaving card=").
+		append(card.getName().charAt(0)).append("***"));
+	}
         return card;
     }
 
@@ -70,6 +84,10 @@ public class ClientDAOImp implements ClientDAO {
      */
     @Override
     public Card makePayment(Actor user, int cardId, double payment) {
+	logger.info(new StringBuilder("Entering name=").
+		append(user.getName().charAt(0)).
+		append("*** cardId=" + cardId).append(" payment=").
+		append(payment));
 	Card card = check(user, cardId);
 	if (card != null) {
 	    if (!card.getBill().getIsBlocked()) {
@@ -81,6 +99,12 @@ public class ClientDAOImp implements ClientDAO {
                 session.close();	
 	    }
 	}
+	if (card == null) {
+	    logger.info("Leaving card=null");
+	} else {
+	    logger.info(new StringBuilder("Leaving card=").
+		append(card.getName().charAt(0)).append("***"));
+	}
 	return card;
     }
 
@@ -89,6 +113,10 @@ public class ClientDAOImp implements ClientDAO {
      */
     @Override
     public Card fillCard(Actor user, int cardId, double fill) {
+	logger.info(new StringBuilder("Entering name=").
+		append(user.getName().charAt(0)).
+		append("*** cardId=" + cardId).append(" fill=").
+		append(fill));
 	Card card = check(user, cardId);
 	if (card != null) {
 	    if (!card.getBill().getIsBlocked()) {
@@ -100,6 +128,12 @@ public class ClientDAOImp implements ClientDAO {
                 session.close();	
 	    }
 	}
+	if (card == null) {
+	    logger.info("Leaving card=null");
+	} else {
+	    logger.info(new StringBuilder("Leaving card=").
+		append(card.getName().charAt(0)).append("***"));
+	}
 	return card;
     }
 
@@ -108,6 +142,9 @@ public class ClientDAOImp implements ClientDAO {
      */
     @Override
     public Card check(Actor user, int cardId) {
+	logger.info(new StringBuilder("Entering name=").
+		append(user.getName().charAt(0)).
+		append("*** cardId=" + cardId));
 	Card card = null;
 	try {
 	    card = user.getCards().stream().filter(c -> {
@@ -115,6 +152,12 @@ public class ClientDAOImp implements ClientDAO {
 	    		}).findFirst().get();
 	} catch (NoSuchElementException e) {
 	    e.printStackTrace();
+	}
+	if (card == null) {
+	    logger.info("Leaving card=null");
+	} else {
+	    logger.info(new StringBuilder("Leaving card=").
+		append(card.getName().charAt(0)).append("***"));
 	}
 	return card;
     }

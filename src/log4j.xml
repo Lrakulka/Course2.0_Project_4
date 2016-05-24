@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration PUBLIC
+  "-//APACHE//DTD LOG4J 1.2//EN" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+
+<log4j:configuration debug="false"
+	xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="bulk" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="/media/asd/Work/payments.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.EnhancedPatternLayout">
+			<param name="ConversionPattern" value="%d{HH:mm:ss.SSS} %-5level [%thread][%logger{0}] [%M] %m%n" />
+		</layout>
+	</appender>
+
+	<root>
+		<priority value="DEBUG" />
+		<appender-ref ref="bulk" />
+	</root>
+
+</log4j:configuration>

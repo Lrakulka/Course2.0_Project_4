@@ -4,6 +4,8 @@
 package com.homework.controller;
 
 import java.security.Principal;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -28,6 +30,7 @@ public class SpringControllerMVC {
     private AdminDAO adminDAO;
     private ClientDAO clientDAO;
     private ActorDAO actorDAO;
+    private static final Logger logger = Logger.getLogger(SpringControllerMVC.class);
     
     @Autowired(required=true)
     public void setAdminDAO(AdminDAO adminDAO, ClientDAO clientDAO, 
@@ -39,8 +42,10 @@ public class SpringControllerMVC {
     
     @RequestMapping(value = "/**")
     public ModelAndView welcome() {
+	logger.info("Entering");
 	ModelAndView model = new ModelAndView();
 	model.setViewName("welcome");		
+	logger.info(new StringBuilder("Leaving ").append(model.toString()));
 	return model;
     }
     
@@ -49,6 +54,8 @@ public class SpringControllerMVC {
     public ModelAndView login(
   	@RequestParam(value = "error", required = false) String error,
   	@RequestParam(value = "logout", required = false) String logout) {
+	logger.info(new StringBuilder("Entering error=").append(error).
+		append(" logout=").append(logout));
   	ModelAndView model = new ModelAndView();  	
   	if (error != null) {
   	    model.addObject("error", "Invalid username and password!");
@@ -57,15 +64,16 @@ public class SpringControllerMVC {
   	    model.addObject("msg", "You've been logged out successfully.");
   	}
   	model.setViewName("login");
+  	logger.info(new StringBuilder("Leaving ").append(model.toString()));
   	return model;
     }
   
     //for 403 access denied page
     @RequestMapping(value = "/403**", method = RequestMethod.GET)
     public ModelAndView accesssDenied(Principal principal) {
+	logger.info("Entering");
 	ModelAndView model = new ModelAndView();
 	// check if user is login
-	
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	if (!(auth instanceof AnonymousAuthenticationToken)) {
 	    model.addObject("username", principal.getName());
@@ -73,34 +81,39 @@ public class SpringControllerMVC {
 	} else {
 	    model.setViewName("welcome");
 	}
+	logger.info(new StringBuilder("Leaving ").append(model.toString()));
 	return model;
-
     }
   	
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView adminHomePage() {
+	logger.info("Entering");
 	ModelAndView model = new ModelAndView();
 	model.setViewName("adminHomePage");
 	model.addObject("clients", adminDAO.getClients());	
-	
+	logger.info(new StringBuilder("Leaving ").append(model.toString()));
 	return model;
     }
     
     @RequestMapping(value = "/client", method = RequestMethod.GET)
     public ModelAndView clientHomePage(Principal principal) {
+	logger.info("Entering");
 	Actor user = actorDAO.findByActorName(principal.getName());
 	ModelAndView model = new ModelAndView();
 	model.setViewName("clientHomePage");
 	model.addObject("cards", user.getCards());	
+	logger.info(new StringBuilder("Leaving ").append(model.toString()));
 	return model;
     }
     
     @RequestMapping(value = "/releaseClientBill", method = RequestMethod.POST)
     public ModelAndView releaseClientBill(@RequestParam("billBlockId") int billId) {
+	logger.info(new StringBuilder("Entering billId=").append(billId));
 	adminDAO.releaseBill(billId);	
 	ModelAndView model = new ModelAndView();
 	model.setViewName("adminHomePage");
 	model.addObject("clients", adminDAO.getClients());
+	logger.info(new StringBuilder("Leaving ").append(model.toString()));
 	return model;
     }
     
@@ -108,33 +121,44 @@ public class SpringControllerMVC {
     @RequestMapping(value = "/blockClientBill", method = RequestMethod.POST)
     public ModelAndView blockClientBill(@RequestParam("blockBill") int cardId, 
 	    Principal principal) {
+	logger.info(new StringBuilder("Entering cardId=").append(cardId));
 	Actor user = actorDAO.findByActorName(principal.getName());	
 	clientDAO.blockCard(user, cardId);
 	ModelAndView model = new ModelAndView();
 	model.setViewName("clientHomePage");
 	model.addObject("cards", user.getCards());	
+	logger.info(new StringBuilder("Leaving ").append(model.toString()));
 	return model;
     }
     
     @RequestMapping(value = "/fillClientBill", method = RequestMethod.POST)
     public ModelAndView fillClientBill(@RequestParam("fillBill") int cardId, 
 	    @RequestParam("moneyCount") double money, Principal principal) {
+	logger.info(new StringBuilder("Entering cardId=").append(cardId).
+		append(" money=").append(money).append(" principal=").
+		append(principal));
 	Actor user = actorDAO.findByActorName(principal.getName());	
 	clientDAO.fillCard(user, cardId, money);
 	ModelAndView model = new ModelAndView();
 	model.setViewName("clientHomePage");
 	model.addObject("cards", user.getCards());	
+	logger.info(new StringBuilder("Leaving ").append(model.toString()));
 	return model;
     }
     
     @RequestMapping(value = "/makeClientPayment", method = RequestMethod.POST)
     public ModelAndView makeClientPayment(@RequestParam("makePayment") int cardId, 
 	    @RequestParam("moneyCount") double payment, Principal principal) {
+	logger.info(new StringBuilder("Entering cardId=").append(cardId).
+		append(" payment=").append(payment).append(
+		" principal.getName()=").append(principal.getName().
+			charAt(0)).append("***").toString());
 	Actor user = actorDAO.findByActorName(principal.getName());	
 	clientDAO.makePayment(user, cardId, payment);
 	ModelAndView model = new ModelAndView();
 	model.setViewName("clientHomePage");
 	model.addObject("cards", user.getCards());	
+	logger.info(new StringBuilder("Leaving ").append(model.toString()));
 	return model;
     }
 }
