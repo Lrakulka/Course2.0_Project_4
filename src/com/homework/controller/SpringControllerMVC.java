@@ -133,13 +133,20 @@ public class SpringControllerMVC {
     
     @RequestMapping(value = "/fillClientBill", method = RequestMethod.POST)
     public ModelAndView fillClientBill(@RequestParam("fillBill") int cardId, 
-	    @RequestParam("moneyCount") double money, Principal principal) {
+	    @RequestParam("moneyCount") String moneySt, Principal principal) {
 	logger.info(new StringBuilder("Entering cardId=").append(cardId).
-		append(" money=").append(money).append(" principal=").
+		append(" money=").append(moneySt).append(" principal=").
 		append(principal));
-	Actor user = actorDAO.findByActorName(principal.getName());	
-	clientDAO.fillCard(user, cardId, money);
+	Actor user = actorDAO.findByActorName(principal.getName());
 	ModelAndView model = new ModelAndView();
+	try {
+	    double money = Double.valueOf(moneySt);
+	    clientDAO.fillCard(user, cardId, money);
+	} catch (Exception e) {
+	    logger.warn(new StringBuilder("Converting exception moneySt=").
+		    		append(moneySt));
+	    model.addObject("msg", "Converting error");
+	}
 	model.setViewName("clientHomePage");
 	model.addObject("cards", user.getCards());	
 	logger.info(new StringBuilder("Leaving ").append(model.toString()));
@@ -148,14 +155,21 @@ public class SpringControllerMVC {
     
     @RequestMapping(value = "/makeClientPayment", method = RequestMethod.POST)
     public ModelAndView makeClientPayment(@RequestParam("makePayment") int cardId, 
-	    @RequestParam("moneyCount") double payment, Principal principal) {
+	    @RequestParam("moneyCount") String paymentSt, Principal principal) {
 	logger.info(new StringBuilder("Entering cardId=").append(cardId).
-		append(" payment=").append(payment).append(
+		append(" paymentSt=").append(paymentSt).append(
 		" principal.getName()=").append(principal.getName().
 			charAt(0)).append("***").toString());
-	Actor user = actorDAO.findByActorName(principal.getName());	
-	clientDAO.makePayment(user, cardId, payment);
+	Actor user = actorDAO.findByActorName(principal.getName());
 	ModelAndView model = new ModelAndView();
+	try {
+	    double payment = Double.valueOf(paymentSt);
+	    clientDAO.makePayment(user, cardId, payment);
+	} catch (Exception e) {
+	    model.addObject("msg", "Converting error");
+	    logger.warn(new StringBuilder("Converting exception moneySt=").
+		    		append(paymentSt));
+	}
 	model.setViewName("clientHomePage");
 	model.addObject("cards", user.getCards());	
 	logger.info(new StringBuilder("Leaving ").append(model.toString()));

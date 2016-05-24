@@ -18,7 +18,9 @@ buttonInfo="${unblock}"
 textBlocked="${blocked}"  
 textUnBlocked="${unblocked}" 
 parameterName="${_csrf.parameterName}" token="${_csrf.token}" />
-
+<c:if test="${not empty msg}">
+	<div style="color:red"><spring:message code="admin.label.msg" /></div>
+</c:if>
 <c:url value="/j_spring_security_logout" var="logoutUrl" />
 <!-- csrt for log out-->
 <form action="${logoutUrl}" method="post" id="logoutForm">
