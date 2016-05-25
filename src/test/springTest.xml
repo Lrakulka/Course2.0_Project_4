@@ -55,4 +55,8 @@
     <bean id="adminDAO" class="com.homework.dao.AdminDAOImp">
         <constructor-arg name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </bean>
+    
+    <bean id="actorDAO" class="com.homework.dao.ActorDAOImp">
+        <constructor-arg name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </bean>
 </beans>

@@ -15,6 +15,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.homework.dao.ActorDAO;
+import com.homework.dao.ActorDAOImp;
 import com.homework.dao.AdminDAO;
 import com.homework.dao.AdminDAOImp;
 import com.homework.dao.ClientDAO;
@@ -24,6 +26,7 @@ import com.homework.entities.Card;
 /**
  * @author asd
  *
+ * Tests for DAO of project.
  */
 public class JUnitTestDAO {
     private static final double DELTA = 1e-15;
@@ -31,6 +34,7 @@ public class JUnitTestDAO {
     private static final double PAYMENTS = 200d;
     private static AdminDAO adminDAO;
     private static ClientDAO clientDAO;
+    private static ActorDAO actorDAO;
     private static ClassPathXmlApplicationContext context;
     private static SessionFactory factory;
     private static List<Actor> actors;
@@ -41,6 +45,7 @@ public class JUnitTestDAO {
 	factory = (SessionFactory) context.getBean("hibernate4AnnotatedSessionFactory");
         adminDAO = context.getBean(AdminDAOImp.class);
         clientDAO = context.getBean(ClientDAOImp.class);
+        actorDAO = context.getBean(ActorDAOImp.class);
         actors = adminDAO.getClients();
     }
     
@@ -163,6 +168,13 @@ public class JUnitTestDAO {
 		forEach(c -> {
 		    assertNull(clientDAO.check(a, c.getId() + Integer.MIN_VALUE));
 		    });
+	});
+    }
+    
+    @Test
+    public void findByActorName() {
+	adminDAO.getClients().stream().forEach(a -> {
+	    assertTrue(a.equals(actorDAO.findByActorName(a.getName())));
 	});
     }
 }

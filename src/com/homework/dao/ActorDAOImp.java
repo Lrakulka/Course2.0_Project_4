@@ -12,12 +12,12 @@ import org.springframework.stereotype.Repository;
 import com.homework.entities.Actor;
 
 @Repository("actorDAO")
-public class ActorDaoImpl implements ActorDAO {
-    private static final Logger logger = Logger.getLogger(ActorDaoImpl.class);
+public class ActorDAOImp implements ActorDAO {
+    private static final Logger logger = Logger.getLogger(ActorDAOImp.class);
     private SessionFactory sessionFactory;
 
     @Autowired(required=true)
-    public ActorDaoImpl(final SessionFactory sessionFactory) {
+    public ActorDAOImp(final SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
     
