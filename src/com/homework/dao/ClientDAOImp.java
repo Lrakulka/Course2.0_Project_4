@@ -19,7 +19,7 @@ import com.homework.entities.Actor;
 
 /**
  * @author asd
- * 
+ * Realization of actor DAO interface
  */
 @Repository("clientDAO")
 public class ClientDAOImp implements ClientDAO {

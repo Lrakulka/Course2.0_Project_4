@@ -23,7 +23,7 @@ import com.homework.entities.Actor;
 
 /**
  * @author asd
- *
+ * Spring MVC controller.
  */
 @Controller
 public class SpringControllerMVC {
@@ -40,6 +40,10 @@ public class SpringControllerMVC {
 	this.actorDAO = actorDAO;
     }
     
+    /**
+     * Default page.
+     * @return model of welcome page
+     */
     @RequestMapping(value = "/**")
     public ModelAndView welcome() {
 	logger.info("Entering");
@@ -49,7 +53,12 @@ public class SpringControllerMVC {
 	return model;
     }
     
-    //Spring Security see this :
+    /**
+     * Handling logging in system.
+     * @param error - error massage when logging is not successful
+     * @param logout - logout massage when user log out from system
+     * @return - return model of page which must see user
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(
   	@RequestParam(value = "error", required = false) String error,
@@ -68,7 +77,11 @@ public class SpringControllerMVC {
   	return model;
     }
   
-    //for 403 access denied page
+    /**
+     * Handling user access to not allowed page.
+     * @param principal - data about user
+     * @return model of error page or model of welcome page if user not login
+     */
     @RequestMapping(value = "/403**", method = RequestMethod.GET)
     public ModelAndView accesssDenied(Principal principal) {
 	logger.info("Entering");
@@ -85,6 +98,10 @@ public class SpringControllerMVC {
 	return model;
     }
   	
+    /**
+     * Prepare admin room page.
+     * @return model of admin room
+     */
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView adminHomePage() {
 	logger.info("Entering");
@@ -95,6 +112,12 @@ public class SpringControllerMVC {
 	return model;
     }
     
+    /**
+     * /**
+     * Prepare client room page.
+     * @param principal - data about user
+     * @return model of client room
+     */
     @RequestMapping(value = "/client", method = RequestMethod.GET)
     public ModelAndView clientHomePage(Principal principal) {
 	logger.info("Entering");
@@ -106,6 +129,11 @@ public class SpringControllerMVC {
 	return model;
     }
     
+    /**
+     * Handling request of client bill unblock
+     * @param billId - bill id which need to unblock
+     * @return model of admin room with updated data
+     */
     @RequestMapping(value = "/releaseClientBill", method = RequestMethod.POST)
     public ModelAndView releaseClientBill(@RequestParam("billBlockId") int billId) {
 	logger.info(new StringBuilder("Entering billId=").append(billId));
@@ -117,7 +145,12 @@ public class SpringControllerMVC {
 	return model;
     }
     
-    // Card table handlers
+    /**
+     * Handling request of client bill block
+     * @param cardId - id of card which connected to blocking bill
+     * @param principal - data about user which wants to block bill
+     * @return model of client room with updated data
+     */
     @RequestMapping(value = "/blockClientBill", method = RequestMethod.POST)
     public ModelAndView blockClientBill(@RequestParam("blockBill") int cardId, 
 	    Principal principal) {
@@ -131,6 +164,13 @@ public class SpringControllerMVC {
 	return model;
     }
     
+    /**
+     * Handling request of client's bill filling with money
+     * @param cardId - id of card which connected with bill
+     * @param moneySt - money count to fill bill 
+     * @param principal - data about user which want to fill his bill
+     * @return model of client room with updated data
+     */
     @RequestMapping(value = "/fillClientBill", method = RequestMethod.POST)
     public ModelAndView fillClientBill(@RequestParam("fillBill") int cardId, 
 	    @RequestParam("moneyCount") String moneySt, Principal principal) {
@@ -153,6 +193,13 @@ public class SpringControllerMVC {
 	return model;
     }
     
+    /**
+     * Handling request of client's bill payment
+     * @param cardId - id of card which connected with bill
+     * @param paymentSt - money count to make payment 
+     * @param principal - data about user which want to make payment
+     * @return model of client room with updated data
+     */
     @RequestMapping(value = "/makeClientPayment", method = RequestMethod.POST)
     public ModelAndView makeClientPayment(@RequestParam("makePayment") int cardId, 
 	    @RequestParam("moneyCount") String paymentSt, Principal principal) {

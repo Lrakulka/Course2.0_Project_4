@@ -18,10 +18,14 @@ import com.homework.dao.ActorDAO;
 import com.homework.entities.Actor;
 import com.homework.entities.ActorRole;
 
+/**
+ * 
+ * @author asd
+ * Service handling authorization of actor
+ */
 @Service("myActorDetailsService")
 public class MyActorDetailsService implements UserDetailsService {
-    private static final Logger logger = Logger.getLogger(MyActorDetailsService.class);
-    
+    private static final Logger logger = Logger.getLogger(MyActorDetailsService.class);    
     private ActorDAO actorDAO;
 
     @Autowired(required=true)
@@ -42,8 +46,13 @@ public class MyActorDetailsService implements UserDetailsService {
 	return buildActorForAuthentication(actor, authorities);
     }
 
-    // Converts com.homework.Actor to
-    // org.springframework.security.core.userdetails.User
+    /**
+     *  Converts com.homework.Actor to
+     *  org.springframework.security.core.userdetails.User
+     * @param actor converting object
+     * @param authorities list of actor authority in system
+     * @return converted object
+     */
     private User buildActorForAuthentication(Actor actor, 
 	List<GrantedAuthority> authorities) {
 	logger.info("Convertion com.homework.Actor to" +
@@ -53,6 +62,11 @@ public class MyActorDetailsService implements UserDetailsService {
                         true, true, true, authorities);
     }
 
+    /**
+     * Builds actor authority
+     * @param actorRoles - list of actor roles in system
+     * @return list of actor authority in system
+     */
     private List<GrantedAuthority> buildActorAuthority(List<ActorRole> actorRoles) {
 	logger.info(new StringBuilder("Entering actorRolesCount=").
 		append(actorRoles.size()));

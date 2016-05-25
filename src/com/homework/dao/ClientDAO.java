@@ -8,7 +8,7 @@ import com.homework.entities.Actor;
 import com.homework.entities.Card;
 /**
  * @author asd
- * DAO interface for actor client.
+ * Interface of client DAO
  */
 public interface ClientDAO {
     /**

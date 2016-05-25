@@ -17,7 +17,7 @@ import com.homework.entities.Actor;
 
 /**
  * @author asd
- *
+ * Realization of actor DAO interface
  */
 @Repository("adminDAO")
 public class AdminDAOImp implements AdminDAO {

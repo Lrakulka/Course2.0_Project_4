@@ -11,6 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.homework.entities.Actor;
 
+/**
+ * 
+ * @author asd
+ * Realization of actor DAO interface
+ */
 @Repository("actorDAO")
 public class ActorDAOImp implements ActorDAO {
     private static final Logger logger = Logger.getLogger(ActorDAOImp.class);

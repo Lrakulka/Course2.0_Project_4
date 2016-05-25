@@ -8,11 +8,11 @@ import com.homework.entities.Actor;
 
 /**
  * @author asd
- * DAO interface for actor admin.
+ * Interface of admin DAO.
  */
 public interface AdminDAO {
     /**
-     * Return set of all clients.
+     * Return list of all clients.
      * @return set of clients
      */
     List<Actor> getClients();
